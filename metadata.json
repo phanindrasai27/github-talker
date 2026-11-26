@@ -1,0 +1,8 @@
+{
+  "name": "GitHub Talker",
+  "description": "Interactive codebase intelligence workspace to ingest, explore, and chat with any public GitHub repository using semantic retrieval and grounded code citations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "github-talker",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000 -H 0.0.0.0",
+    "build": "next build",
+    "start": "next start -p 3000 -H 0.0.0.0",
+    "lint": "tsc --noEmit && next lint"
+  },
+  "dependencies": {
+    "@google/genai": "^3.6.1",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^26.6.11",
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "8",
+    "eslint-config-next": "15",
+    "lucide-react": "^1.81.0",
+    "next": "15",
+    "postcss": "^8.5.33",
+    "react": "19",
+    "react-dom": "19",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "tailwindcss": "^4.3.5"
+  },
+  "devDependencies": {
+    "typescript": "5.8.3"
+  }
+}

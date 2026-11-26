@@ -1,107 +1,42 @@
 # GitHub Talker
 
-A full-stack application that allows you to chat with your GitHub repositories using LangChain and LLMs.
+A full-stack codebase intelligence workspace that lets you ingest, explore, and chat with any public GitHub repository using hybrid semantic retrieval and grounded line-numbered code citations.
 
 ## Features
 
-- Load any public GitHub repository
-- Chat with the codebase using natural language
-- View relevant code snippets in context
-- Get repository summaries
-- Modern, responsive UI
+- **Direct GitHub Ingestion**: Load any public repository by URL (`https://github.com/owner/repo` or `owner/repo`), with optional branch selection and configurable file indexing depth (`40`, `60`, or `100` priority files).
+- **Hybrid Semantic + Lexical Retrieval**: Line-aware code chunking paired with Gemini embeddings (`gemini-embedding-2`) and symbol/path scoring so both architecture questions and exact function lookups return precise line ranges.
+- **Streaming Grounded Chat**: Live token streaming via `gemini-4-hydrogen` over Server-Sent Events (SSE), complete with Markdown rendering, copyable code blocks, conversation memory, and clickable cited source snippets.
+- **Interactive File Tree & Code Viewer**: Browse and filter the full repository file tree, inspect any file on demand with line numbers and citation highlighting, and pin specific files to focus follow-up chat questions.
+- **Architectural Summary & Export**: Automatically generates a structured architectural overview, core components, design patterns, clickable key entry points, language breakdown, and Markdown export.
 
 ## Tech Stack
 
-- **Backend**: FastAPI, LangChain, HuggingFace Embeddings, FAISS
-- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
-- **LLM**: Mistral-7B via OpenRouter
-- **Deployment**: Railway (Backend), Vercel (Frontend)
+- **Framework**: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4
+- **AI & Retrieval**: `@google/genai` (`gemini-4-hydrogen` + `gemini-embedding-2`) running strictly server-side in Next.js API routes
+- **Repository Access**: GitHub REST API & Raw Content CDN
 
-## Setup
+## Local Development
 
-### Prerequisites
-
-- Python 3.8+
-- Node.js 16+
-- OpenRouter API key
-
-### Backend Setup
-
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
-
-2. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Set environment variables:
-   ```bash
-   export OPENROUTER_API_KEY=your_api_key_here
-   ```
-
-5. Run the backend:
-   ```bash
-   uvicorn main:app --reload
-   ```
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
-
-2. Install dependencies:
+1. Install dependencies:
    ```bash
    npm install
    ```
 
-3. Run the development server:
+2. Configure environment variables in `.env.local`:
+   ```bash
+   GEMINI_API_KEY=your_gemini_api_key
+   # Optional: increases GitHub REST API rate limits
+   GITHUB_TOKEN=your_github_token
+   ```
+
+3. Start the development server on port 3000:
    ```bash
    npm run dev
    ```
 
-## Usage
-
-1. Open your browser and navigate to `http://localhost:3000`
-2. Enter a GitHub repository URL (e.g., `https://github.com/username/repo`)
-3. Click "Load" to process the repository
-4. Start asking questions about the codebase
-5. View relevant code snippets in the context panel
-
-## Deployment
-
-### Backend (Railway)
-
-1. Create a Railway account
-2. Connect your GitHub repository
-3. Set the `OPENROUTER_API_KEY` environment variable
-4. Deploy
-
-### Frontend (Vercel)
-
-1. Create a Vercel account
-2. Import your GitHub repository
-3. Set the backend URL in environment variables
-4. Deploy
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-MIT 
+4. Build for production:
+   ```bash
+   npm run build
+   npm start
+   ```
